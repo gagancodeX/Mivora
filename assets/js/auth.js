@@ -1,7 +1,58 @@
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";import{getAuth,onAuthStateChanged,GoogleAuthProvider,signInWithPopup,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-const firebaseConfig={apiKey:"YOUR_FIREBASE_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_PROJECT.firebasestorage.app",messagingSenderId:"YOUR_MESSAGING_SENDER_ID",appId:"YOUR_FIREBASE_APP_ID"};
-const configured=!Object.values(firebaseConfig).some(v=>v.startsWith("YOUR_"));
-let auth=null;try{if(configured){const app=initializeApp(firebaseConfig);auth=getAuth(app)}}catch(e){console.error(e)}
-const modal=document.getElementById("authModal"),login=document.getElementById("loginBtn"),guest=document.getElementById("guestBtn"),close=document.getElementById("authClose"),google=document.getElementById("googleBtn"),logout=document.getElementById("logoutBtn"),chip=document.getElementById("userChip"),userName=document.getElementById("userName"),userPhoto=document.getElementById("userPhoto"),error=document.getElementById("authError");
-function openAuth(){modal?.classList.add("show");error?.classList.remove("show");if(!configured&&error){error.textContent="Google login is ready, but Firebase credentials are not connected yet.";error.classList.add("show")}}function closeAuth(){modal?.classList.remove("show")}login?.addEventListener("click",openAuth);close?.addEventListener("click",closeAuth);guest?.addEventListener("click",closeAuth);modal?.addEventListener("click",e=>{if(e.target===modal)closeAuth()});google?.addEventListener("click",async()=>{if(!auth){openAuth();return}try{const result=await signInWithPopup(auth,new GoogleAuthProvider());closeAuth();renderUser(result.user)}catch(e){if(error){error.textContent=e.code==="auth/popup-closed-by-user"?"Login cancelled.":"Google sign-in could not be completed.";error.classList.add("show")}}});logout?.addEventListener("click",()=>auth&&signOut(auth));
-function renderUser(u){if(!u){login&&(login.style.display="inline-flex");chip&&(chip.style.display="none");return}login&&(login.style.display="none");if(chip){chip.style.display="flex";userName.textContent=u.displayName?.split(" ")[0]||"You";if(u.photoURL){userPhoto.src=u.photoURL;userPhoto.style.display="block"}else userPhoto.style.display="none"}}if(auth)onAuthStateChanged(auth,renderUser);
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const userChip = document.getElementById("userChip");
+const userName = document.getElementById("userName");
+const userPhoto = document.getElementById("userPhoto");
+
+async function loadCurrentUser() {
+  try {
+    const response = await fetch("/api/me", { credentials: "same-origin" });
+    const data = await response.json();
+
+    if (data.authenticated && data.user) {
+      if (loginBtn) loginBtn.style.display = "none";
+      if (userChip) userChip.style.display = "flex";
+      if (userName) userName.textContent = data.user.name?.split(" ")[0] || "You";
+      if (userPhoto) {
+        if (data.user.avatarUrl) {
+          userPhoto.src = data.user.avatarUrl;
+          userPhoto.style.display = "block";
+        } else {
+          userPhoto.style.display = "none";
+        }
+      }
+    } else {
+      if (loginBtn) loginBtn.style.display = "inline-flex";
+      if (userChip) userChip.style.display = "none";
+    }
+  } catch (error) {
+    console.error("Could not load Mivora session:", error);
+  }
+}
+
+loginBtn?.addEventListener("click", () => {
+  window.location.href = "/auth/google";
+});
+
+logoutBtn?.addEventListener("click", async () => {
+  await fetch("/auth/logout", { method: "POST", credentials: "same-origin" });
+  window.location.reload();
+});
+
+loadCurrentUser();
+
+window.MivoraAuth = {
+  async saveScore(game, score) {
+    try {
+      const response = await fetch("/api/scores", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ game, score })
+      });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  }
+};
