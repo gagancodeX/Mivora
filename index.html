@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Mivora — tiny relaxing games for quiet moments.">
+  <title>Mivora — Relax. Play. Reset.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="nav">
+    <a class="brand" href="#"><span class="brand-mark">✦</span> mivora</a>
+    <nav><a href="#games">Games</a><a href="#about">About</a></nav>
+    <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">☾</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span></span> A tiny place to slow down</div>
+      <h1>Relax your mind.<br><em>Play for a while.</em></h1>
+      <p>Simple browser games designed for quiet moments, quick resets, and a little less noise.</p>
+      <a class="primary" href="#games">Explore games <span>↓</span></a>
+      <div class="hero-note"><span>✦</span> No sign-up · No pressure · Just play</div>
+    </section>
+
+    <section id="games" class="games">
+      <div class="section-head"><div><span class="eyebrow">MINI EXPERIENCES</span><h2>Choose your kind of calm.</h2></div><div id="score" class="score">0 min session</div></div>
+      <div class="game-grid">
+        <article class="game-card featured" data-game="bubbles">
+          <div class="card-art bubbles-art" id="bubblePreview"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="card-copy"><span class="tag">01 · FOCUS</span><h3>Bubble Drift</h3><p>Pop floating bubbles and clear your head.</p><button class="play" data-open="bubbles">Play now <span>→</span></button></div>
+        </article>
+        <article class="game-card" data-game="breath">
+          <div class="card-art breath-art"><div class="mini-breath"></div></div>
+          <div class="card-copy"><span class="tag">02 · BREATHE</span><h3>Slow Breath</h3><p>Follow a gentle rhythm for a quiet reset.</p><button class="play" data-open="breath">Begin <span>→</span></button></div>
+        </article>
+        <article class="game-card" data-game="memory">
+          <div class="card-art memory-art"><span>◌</span><span>◒</span><span>◌</span><span>◓</span></div>
+          <div class="card-copy"><span class="tag">03 · MEMORY</span><h3>Soft Match</h3><p>A tiny memory game with zero pressure.</p><button class="play" data-open="memory">Play now <span>→</span></button></div>
+        </article>
+        <article class="game-card" data-game="flow">
+          <div class="card-art flow-art"><div></div><div></div><div></div></div>
+          <div class="card-copy"><span class="tag">04 · FLOW</span><h3>Color Flow</h3><p>Tap the colors in sequence. Stay in the flow.</p><button class="play" data-open="flow">Play now <span>→</span></button></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="quote"><span>“</span><p>You don't need to be productive<br>every minute of the day.</p><small>Mivora is made for the spaces between things.</small></section>
+  </main>
+
+  <footer><span>© 2026 Mivora</span><span>Made for slower moments ✦</span></footer>
+
+  <div id="modal" class="modal" aria-hidden="true"><div class="modal-panel"><button id="close" class="close">×</button><div id="gameMount"></div></div></div>
+  <script src="script.js"></script>
+</body>
+</html>
