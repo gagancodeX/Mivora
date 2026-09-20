@@ -1,0 +1,1 @@
+const label=document.getElementById("label"),cycles=document.getElementById("cycles");let inhale=true,n=0;setInterval(()=>{inhale=!inhale;if(inhale)n++;label.textContent=inhale?"Inhale":"Exhale";cycles.textContent=n+" cycles"},5000);
