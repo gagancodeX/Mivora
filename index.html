@@ -4,13 +4,13 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Mivora — peaceful mini games for quiet moments.">
 <meta name="theme-color" content="#101827"><title>Mivora — Play. Relax. Reset.</title>
-<link rel="icon" href="assets/img/logo.svg"><link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/logo.svg"><link rel="stylesheet" href="assets/css/style.css"><link rel="stylesheet" href="assets/css/auth.css">
 </head>
 <body>
 <header class="nav">
   <a class="brand" href="index.html"><img src="assets/img/logo.svg" alt=""> <span>Mivora</span></a>
   <nav><a class="active" href="index.html">Home</a><a href="#games">Games</a><a href="#about">About</a></nav>
-  <div class="auth-actions"><button id="loginBtn" class="auth-btn primary-auth">Sign in</button><div id="userChip" class="user-chip"><img id="userPhoto" alt=""><span id="userName"></span><button id="logoutBtn" class="auth-btn">Log out</button></div><button id="themeBtn" class="icon-btn" aria-label="Toggle theme">☾</button></div>
+  <div class="auth-actions"><button id="loginBtn" class="auth-btn primary-auth">Sign in with Google</button><div id="userChip" class="user-chip"><img id="userPhoto" alt=""><span id="userName"></span><button id="logoutBtn" class="auth-btn">Log out</button></div><button id="themeBtn" class="icon-btn" aria-label="Toggle theme">☾</button></div>
 </header>
 <main>
 <section class="hero">
@@ -32,5 +32,5 @@
 <section id="about" class="about"><div><span class="eyebrow">WHY MIVORA</span><h2>Made for the spaces<br>between things.</h2></div><div><p>You don't need to be productive every minute of the day. Mivora gives you small, screen-friendly rituals that are easy to start and easy to leave.</p><div class="pills"><span>01 · No pressure</span><span>02 · No leaderboard</span><span>03 · No sign-up</span></div></div></section>
 </main>
 <footer><a class="brand mini" href="index.html"><img src="assets/img/logo.svg" alt=""> Mivora</a><span>Made for slower moments ✦</span><span>© 2026</span></footer>
-<div id="authModal" class="auth-modal" aria-hidden="true"><div class="auth-box"><button id="authClose" class="back-btn auth-close" aria-label="Close">×</button><img src="assets/img/logo.svg" alt="" style="width:44px;height:44px"><h2>Welcome to Mivora</h2><p>Sign in to keep your Mivora experience connected. You can also continue without an account.</p><button id="googleBtn" class="google-btn"><span class="google-g">G</span> Continue with Google</button><button id="guestBtn" class="guest-btn">Continue as guest</button><div id="authError" class="auth-error"></div><p class="auth-note">Your games remain playable without signing in.</p></div></div><script src="assets/js/main.js"></script><script type="module" src="assets/js/auth.js"></script>
+<script src="assets/js/main.js"></script><script src="assets/js/auth.js"></script>
 </body></html>
