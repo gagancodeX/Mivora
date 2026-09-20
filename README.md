@@ -2,23 +2,56 @@
 
 Mivora is a calm collection of tiny browser games for quiet moments.
 
+## Features
+- Responsive desktop + mobile UI
+- Four standalone mini-games
+- Google sign-in through the Mivora backend
+- Guest play without an account
+- Server-side sessions
+- User accounts and game scores stored in PostgreSQL
+
 ## Structure
 - `index.html` — homepage
-- `games/bubble-drift.html` + its own JS — focus game
-- `games/slow-breath.html` + its own JS — breathing game
-- `games/soft-match.html` + its own JS — memory game
-- `games/color-flow.html` + its own JS — sequence game
+- `games/` — separate page for every game
 - `assets/css/style.css` — shared visual system
-- `assets/js/main.js` — shared theme/session logic
-- `assets/img/logo.svg` — Mivora logo
+- `assets/css/auth.css` — authentication UI
+- `assets/js/main.js` — theme/session logic
+- `assets/js/auth.js` — frontend authentication client
+- `assets/js/*-*.js` — individual game logic
+- `server.js` — Express backend + Google OAuth + API
+- `package.json` — backend dependencies
 
 ## Stack
-HTML · CSS · JavaScript
+HTML · CSS · JavaScript · Node.js · Express · PostgreSQL · Google OAuth
 
-No framework, build step, account, backend, or dependencies required.
+## Environment variables
+Set these on the server:
+
+`DATABASE_URL`
+`SESSION_SECRET`
+`GOOGLE_CLIENT_ID`
+`GOOGLE_CLIENT_SECRET`
+`GOOGLE_CALLBACK_URL`
+
+For local development, the callback is typically:
+`http://localhost:3000/auth/google/callback`
+
+For Render, use your public service URL:
+`https://YOUR-SERVICE.onrender.com/auth/google/callback`
 
 ## Run
-Open `index.html` in a browser or deploy the repository as a static site.
+```bash
+npm install
+npm start
+```
+
+Open `http://localhost:3000`.
+
+## Auth behavior
+- Visitors can play every game without signing in.
+- “Sign in with Google” starts the real Google OAuth flow.
+- The backend creates/updates the user record after Google authentication.
+- The backend stores scores only for signed-in users.
 
 ## License
 MIT
